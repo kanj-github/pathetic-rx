@@ -3,6 +3,8 @@
  */
 public class StartShit {
     public static void main (String args[]) {
-        new OnNextTiming().doShit();
+        //new OnNextTiming().doShit();
+        //new ReturnLoopinMap().doShit();
+        new DoOnNextVsSubscribeAction().doShit();
     }
 }
