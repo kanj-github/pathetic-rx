@@ -6,6 +6,6 @@ public class StartShit {
         //new OnNextTiming().doShit();
         //new ReturnLoopinMap().doShit();
         //new DoOnNextVsSubscribeAction().doShit();
-        new IsPublishingNullError().doShit();
+        new DoSomethingToEachItemOfList().doShit();
     }
 }
