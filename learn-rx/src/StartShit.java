@@ -6,6 +6,6 @@ public class StartShit {
         //new OnNextTiming().doShit();
         //new ReturnLoopinMap().doShit();
         //new DoOnNextVsSubscribeAction().doShit();
-        new DoSomethingToEachItemOfList().doShit();
+        new CollectBatchesRecursively().getAllInBatches();
     }
 }
