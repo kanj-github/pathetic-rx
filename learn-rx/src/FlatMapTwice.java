@@ -1,8 +1,4 @@
 import rx.Observable;
-import rx.functions.Action1;
-import rx.functions.Func1;
-
-import java.util.List;
 
 /**
  * Created by naraykan on 31/05/17.
@@ -10,31 +6,13 @@ import java.util.List;
 public class FlatMapTwice {
     public static void main(String[] args) {
         Observable.just(new DataContainer())
-                .flatMap(new Func1<DataContainer, Observable<String>>() {
-                    @Override
-                    public Observable<String> call(DataContainer dataContainer) {
-                        return Observable.from(dataContainer.data)
-                                .flatMap(new Func1<String, Observable<String>>() {
-                                    @Override
-                                    public Observable<String> call(String s) {
-                                        return getDataAboutString(s)
-                                                .map(new Func1<Integer, String>() {
-                                                    @Override
-                                                    public String call(Integer integer) {
-                                                        return s + integer;
-                                                    }
-                                                });
-                                    }
-                                });
-                    }
-                })
+                .flatMap(dataContainer -> Observable.from(dataContainer.data)
+                        .flatMap(s -> getDataAboutString(s)
+                                .map(integer -> s + integer)))
                 .toList()
-                .subscribe(new Action1<List<String>>() {
-                    @Override
-                    public void call(List<String> strings) {
-                        for (String s: strings) {
-                            System.out.println(s);
-                        }
+                .subscribe(strings -> {
+                    for (String s: strings) {
+                        System.out.println(s);
                     }
                 });
     }
