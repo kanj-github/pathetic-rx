@@ -1,4 +1,4 @@
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Created by naraykan on 31/05/17.

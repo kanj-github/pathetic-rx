@@ -1,8 +1,9 @@
 /**
  * Created by voldemort on 23/11/16.
  */
-import rx.Subscriber;
-import rx.Observable;
+
+import io.reactivex.Observable;
+import org.reactivestreams.Subscriber;
 
 /* ​
 *  Make Subscriber and call onNext before subscribing to observable

@@ -1,4 +1,4 @@
-import rx.subjects.PublishSubject;
+import io.reactivex.subjects.PublishSubject;
 
 /**
  * Created by naraykan on 19/01/17.

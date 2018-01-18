@@ -1,6 +1,5 @@
-import rx.Observable;
-import rx.functions.Action1;
-import rx.subjects.PublishSubject;
+import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
 
 import java.util.ArrayList;
 import java.util.List;
