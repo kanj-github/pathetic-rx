@@ -13,7 +13,7 @@ public class TransformItemsInListAndGetTheList {
         array.add("abc");
         array.add("!@#");
         array.add("hkjgjhg");
-        Observable.from(array)
+        Observable.fromIterable(array)
                 .flatMap(str -> {
                     final String st = str;
                     System.out.println("flat map - " + st);

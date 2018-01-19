@@ -33,7 +33,7 @@ public class CollectBatchesRecursively {
     void getAllInBatches() {
         getBatch(TOTAL)
                 .flatMap(arr -> fetchMoreBatchesAndAppend(arr, arr.get(0)))
-                .toBlocking()
+                .blockingFirst()
                 .forEach(System.out::println);
     }
 

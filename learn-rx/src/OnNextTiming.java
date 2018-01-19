@@ -3,7 +3,6 @@
  */
 
 import io.reactivex.Observable;
-import org.reactivestreams.Subscriber;
 
 /* ​
 *  Make Subscriber and call onNext before subscribing to observable
@@ -11,17 +10,15 @@ import org.reactivestreams.Subscriber;
 */
 public class OnNextTiming {
     void doShit() {
-        Observable<Garbage> pile = Observable.create(new Observable.OnSubscribe<Garbage>() {
-            @Override
-            public void call(Subscriber<? super Garbage> subscriber) {
-                subscriber.onNext(new Garbage("stuff"));
-                subscriber.onCompleted();
-            }
+        Observable<Garbage> pile = Observable.create(observableEmitter -> {
+            observableEmitter.onNext(new Garbage("stuff"));
+            observableEmitter.onComplete();
         });
+        // Create needs ObservableOnSubscribe<Garbage> instance
 
         Observable<Garbage> pile2 = Observable.create((subscriber) -> {
                 subscriber.onNext(new Garbage("more stuff"));
-                subscriber.onCompleted();
+                subscriber.onComplete();
         });
 
         pile.zipWith(pile2, ((garbage1, garbage2) ->

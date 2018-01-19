@@ -16,8 +16,8 @@ public class DoSomethingToEachItemOfList {
         array.add("!@#");
         Observable<List<String>> result = Observable.just(array);
 
-        result.flatMap(rows -> Observable.from(rows))
-            .flatMap(str -> dealWithString(str)) // Can't use map because map function would have to return Boolean.
+        result.flatMap(Observable::fromIterable)
+            .flatMap(this::dealWithString) // Can't use map because map function would have to return Boolean.
             .subscribe(System.out::println, Throwable::printStackTrace);
 
         // Approach 2
@@ -33,17 +33,7 @@ public class DoSomethingToEachItemOfList {
                         }
                     });
         });
-        stringHandler.subscribe(new Action1<String>() {
-            @Override
-            public void call(String s) {
-
-            }
-        }, new Action1<Throwable>() {
-            @Override
-            public void call(Throwable throwable) {
-
-            }
-        });
+        stringHandler.subscribe(s -> { }, throwable -> { });
     }
 
     private Observable<Boolean> dealWithString(String s) {

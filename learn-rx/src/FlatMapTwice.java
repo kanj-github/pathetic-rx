@@ -6,7 +6,7 @@ import io.reactivex.Observable;
 public class FlatMapTwice {
     public static void main(String[] args) {
         Observable.just(new DataContainer())
-                .flatMap(dataContainer -> Observable.from(dataContainer.data)
+                .flatMap(dataContainer -> Observable.fromArray(dataContainer.data)
                         .flatMap(s -> getDataAboutString(s)
                                 .map(integer -> s + integer)))
                 .toList()
