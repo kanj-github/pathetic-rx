@@ -22,14 +22,10 @@ public class ZipInParallel {
     }
 
     private void doIt() {
-        Observable<String> src1 = Observable.defer(() -> Observable.just(slowString1()));
-        Observable<String> src2 = Observable.defer(() -> Observable.just(slowString2()));
+        Observable<String> src1 = Observable.defer(() -> Observable.just(slowString1())).subscribeOn(Schedulers.io());
+        Observable<String> src2 = Observable.defer(() -> Observable.just(slowString2())).subscribeOn(Schedulers.io());
         long now = System.currentTimeMillis();
-        Disposable d =  Observable.zip(
-                src1.subscribeOn(Schedulers.io()),
-                src2.subscribeOn(Schedulers.io()),
-                (str1, str2) -> str1 + str2
-        )
+        Disposable d =  Observable.zip(src1, src2, (str1, str2) -> str1 + str2)
                 .subscribeOn(Schedulers.io())
                 .subscribe(
                         (str) -> System.out.println(str + " " + (System.currentTimeMillis() - now)),
