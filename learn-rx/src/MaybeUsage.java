@@ -1,3 +1,4 @@
+import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 
 public class MaybeUsage {
@@ -11,20 +12,14 @@ public class MaybeUsage {
         return getStringMaybe().zipWith(getNumberMaybe(), (str, number) -> str.length() > number);
     }
 
-    private void holdOn() {
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException ie) {
-            ie.printStackTrace();
-        }
-    }
-
     private Maybe<String> getStringMaybe() {
         //return Maybe.empty();
-        return Maybe.just("abcd");
+        //return Maybe.just("abcd");
+        return Flowable.just("abcd", "abc", "abcdf").firstElement();
     }
 
     private Maybe<Integer> getNumberMaybe() {
+        //return Maybe.empty();
         return Maybe.fromCallable(() -> {
             System.out.println("Getting number");
             return 3;
