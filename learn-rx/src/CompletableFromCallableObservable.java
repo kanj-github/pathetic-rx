@@ -72,16 +72,28 @@ public class CompletableFromCallableObservable {
         throw new IOException("Error!!");
     }
 
+    private static void stuff() {
+        System.out.println("throw stuff");
+        //throw new RuntimeException("Stuff");
+    }
+
     public static void main(String[] args) {
 
-        CompletableFromCallableObservable completable = new CompletableFromCallableObservable();
+        //CompletableFromCallableObservable completable = new CompletableFromCallableObservable();
         //completable.subscribeCompletable(false, false);
-        completable.subscribeCompletable(false, true);
+        //completable.subscribeCompletable(false, true);
         //completable.subscribeCompletable(true, false);
         //completable.blockingGetCompletable(true, false);
 
+        Completable.fromAction(() -> stuff())
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(() -> {}, (throwable -> {
+                    System.out.println("got thrown stuff");
+                    throwable.printStackTrace();
+                }));
+
         try {
-            Thread.sleep(5000);
+            Thread.sleep(1000);
         } catch (InterruptedException ie) {}
     }
 }
